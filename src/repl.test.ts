@@ -1,6 +1,7 @@
 import { cleanInput } from "./repl";
 import { describe, expect, test } from "vitest";
 
+// test repl
 describe.each([
   {
     input: "  hello  world  ",
@@ -18,7 +19,6 @@ describe.each([
     input: "    ",
     expected: [],
   },
-
 ])("cleanInput($input)", ({ input, expected }) => {
   test(`Expected: ${expected}`, () => {
     const actual = cleanInput(input);
@@ -31,3 +31,5 @@ describe.each([
     }
   });
 });
+
+// test commands
