@@ -4,17 +4,25 @@ export class PokeAPI {
   constructor() {}
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
+    const fullURL = `${PokeAPI.baseURL}/${pageURL}`;
+    console.log("FETCHING FROM:", fullURL);
+    const locations: ShallowLocations[] = [];
+    let jsn;
     try {
-      const obj = fetch(`${PokeAPI.baseURL}/${pageURL}`)
-      console.log(obj);
-      return obj;
+      const obj = await fetch(fullURL);
+      jsn = await obj.json();
     } catch (err) {
-      throw new Error("didn't work");
+      console.log(err);
+      throw new Error("500");
     }
+    for (let l of jsn.results) {
+      locations.push(l.name);
+    }
+    return locations;
   }
 
   async fetchLocation(locationName: string): Promise<Location> {
-    return fetch(`baseURL/location`)
+    return {};
   }
 }
 
